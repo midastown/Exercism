@@ -13,11 +13,15 @@ int word_count(const char *input_text, word_count_word_t * words) {
     // a) if it exist add 1 to count
     // b) else strncpy()
     // 3) keep a count of words of EACH INDIVIDUAL WORD as index of words
+    char* new_input = clean_input(input_text); 
     int words_index = 0, word_index = 0, i, j;
     int len = strlen(input_text);
     char word[MAX_WORD_LENGTH + 1] = "";
 
     for (i=0; i <= len; i++) {
+        if (input_text[i] == ' ' && strlen(word) == 0) {
+            continue;
+        }
         if (input_text[i] == ' ' || input_text[i] == '\0') {
             printf("%s\n", word);
 
@@ -33,9 +37,9 @@ int word_count(const char *input_text, word_count_word_t * words) {
                 strcpy(words[words_index].text, word);
                 words[words_index].count = 1;
                 words_index++;
-                strcpy(word, "");
-                word_index = 0;
             }
+            memset(word, 0, sizeof(word));
+            word_index = 0;
         } else {
             word[word_index] = input_text[i];
             word_index++;
@@ -44,3 +48,34 @@ int word_count(const char *input_text, word_count_word_t * words) {
 
     return words_index;
 }
+
+
+
+
+char* clean_input(const char* input_text) {
+
+    // loop through the string
+    // a) check if special char, replace with space
+    //
+    // b) tolower(each_valid_char)
+    //
+    // c) keep an bookmark on the quote char, if space encountered discard bookmark, if another quote is encountered : change both to space
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
