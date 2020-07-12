@@ -17,18 +17,19 @@ int word_count(const char *input_text, word_count_word_t * words) {
     char* new_input = clean_input(input_text); 
     int words_index = 0, word_index = 0, i, j;
     int len = strlen(new_input);
-    char word[MAX_WORD_LENGTH + 1] = "";
+    char word[1024] = "";
 
     for (i=0; i <= len; i++) {
-        if (new_input[i] == ' ' && strlen(word) == 0) {
+        if ((new_input[i] == ' ' && strlen(word) == 0) || (new_input[i] == '\0' && strlen(word) == 0)) {
             continue;
         }
-        if (new_input[i] == '\0' && strlen(word) == 0) {
-            continue;
-        }
+
         if (new_input[i] == ' ' || new_input[i] == '\0') {
             //printf("%s with count: %d\n", word);
 
+            if (strlen(word) > MAX_WORD_LENGTH) {
+                return -1;
+            }
             int yes = 0;
             for (j=0; j < words_index+1; j++) {
                 if (strcmp(word, words[j].text) == 0) {
@@ -50,7 +51,11 @@ int word_count(const char *input_text, word_count_word_t * words) {
         }
     }
     free(new_input);
-    return words_index;
+    if (words_index > MAX_WORDS) {
+        return EXCESSIVE_NUMBER_OF_WORDS;
+    } else {
+        return words_index;
+    }
 }
 
 

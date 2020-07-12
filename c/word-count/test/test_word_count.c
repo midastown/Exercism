@@ -6,7 +6,7 @@
 
 #define STRING_SIZE (MAX_WORD_LENGTH + 1)
 
-word_count_word_t actual_solution[MAX_WORDS];
+word_count_word_t actual_solution[MAX_WORDS + 1];
 word_count_word_t expected_solution[MAX_WORDS + 1];
 
 void setUp(void)
@@ -379,7 +379,7 @@ static void test_max_length_word(void)
 
 static void test_excessive_length_word(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    int actual_word_count;
    int index = 0;
    char *input_text =
@@ -403,7 +403,6 @@ static void test_excessive_length_word(void)
 
 static void test_max_number_words(void)
 {
-   TEST_IGNORE();
    int actual_word_count;
    int index = 0;
    char *input_text =
@@ -483,7 +482,6 @@ static void test_max_number_words(void)
 
 static void test_excessive_number_words(void)
 {
-   TEST_IGNORE();
    int actual_word_count;
    int index = 0;
    char *input_text =
